@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <!-- AngularJS library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.4.js"></script>
+    <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+</head>
+<body class="b-page" ng-app="myApp">
+    <nav class="navbar navbar-default navbar-fixed-top"></nav>
+    <div class="container" ng-controller="MainController">
+        <div class="jumbotron">
+
+            <form>
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="formData.name" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                </div>
+
+                <div class="form-group row" ng-controller="DatepickerCtrl">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+                    <div class="col-sm-10 input-group g-padding-15">
+                        <input id="inputDate" type="text" class="form-control" ng-change="changed()" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row" ng-controller="TimepickerCtrl">
+                    <label class="col-sm-2 col-form-label">Event Time</label>
+                    <div class="col-sm-10">
+                        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Location</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="formData.location" placeholder="Enter a location">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label class=" col-form-label">Choices</label>
+                        <button type="button" ng-click="addChoice()" class="btn btn-info">Add choice</button>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <div ng-repeat="(key, choice) in formData.choices" class="input-group g-margin-top-10">
+                            <input type="text" ng-model="choice.name" class="form-control" placeholder = "Enter a restaurant name" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="deleteChoice(key)"><i class="glyphicon glyphicon-trash"></i></button>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <button type="button" class="btn btn-success" ng-click="submit()">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <pre ng-cloak ng-hide="!jsonData">{{ jsonData }}</pre>
+
+    </div>
+
+<!-- Modules -->
+<script src="js/app.js"></script>
+
+<!-- Controllers -->
+<script src="js/MainController.js"></script>
+<script src="js/DatepickerCtrl.js"></script>
+<script src="js/TimepickerCtrl.js"></script>
+
+</body>
+</html>
