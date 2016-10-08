@@ -16,7 +16,9 @@ app.controller('MainController', ['$scope', '$filter', function($scope, $filter)
     };
 
     $scope.deleteChoice = function (index) {
-        $scope.formData.choices.splice(index, 1);
+        if ($scope.formData.choices.length > 1) {
+            $scope.formData.choices.splice(index, 1);
+        }
     };
     $scope.addChoice = function () {
         $scope.formData.choices.push({name: ''});
